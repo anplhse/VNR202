@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-6 font-serif text-history-blue;
+  }
+
+  .section-subtitle {
+    @apply text-xl md:text-2xl font-semibold mb-4 text-victory-red;
+  }
+
+  .timeline-item {
+    @apply relative pl-8 pb-8 border-l-2 border-monument-gold;
+  }
+
+  .timeline-dot {
+    @apply absolute w-4 h-4 bg-monument-gold rounded-full -left-2 mt-1.5;
+  }
+}
