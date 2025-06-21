@@ -1,57 +1,88 @@
 const Timeline = () => {
   const events = [
     {
-      date: "18/12/1972",
-      title: "Ngày đầu tiên của chiến dịch",
+      date: "1972-12-17",
+      title: "Nixon ra lệnh tấn công miền Bắc Việt Nam",
       description:
-        "Mỹ mở đầu chiến dịch Linebacker II. Khoảng 129 máy bay B-52 và nhiều loại máy bay khác tham gia cuộc tập kích đầu tiên vào Hà Nội và Hải Phòng. 3 máy bay B-52 bị bắn rơi.",
+        "Tổng thống Nixon phát động chiến dịch tập kích miền Bắc bằng B-52.",
     },
     {
-      date: "19/12/1972",
-      title: "Đêm thứ hai",
+      date: "1972-12-18",
+      title: "Không quân Mỹ mở đầu đợt tập kích Hà Nội",
       description:
-        "Mỹ tiếp tục tập kích với 93 máy bay B-52. Phòng không Việt Nam bắn rơi 6 máy bay B-52 và nhiều máy bay khác.",
+        "B-52 bắt đầu ném bom vào Hà Nội và Hải Phòng, mở màn chiến dịch. Bắn rơi 3 B-52, trong đó 2 rơi tại chỗ.",
     },
     {
-      date: "20-21/12/1972",
-      title: "Thay đổi chiến thuật",
+      date: "1972-12-19",
+      title: "Địch tiếp tục ném bom Hà Nội, Hải Phòng, Bắc Giang…",
       description:
-        "Sau tổn thất nặng nề, không quân Mỹ buộc phải thay đổi chiến thuật tấn công, giảm số lượng máy bay B-52 trong mỗi đợt tấn công.",
+        "Các đợt ném bom vẫn tiếp diễn ở các mục tiêu trọng yếu. Ta bắn rơi 1 B-52, 1 F-4.",
     },
     {
-      date: "22/12/1972",
-      title: "Cuộc không kích dữ dội",
+      date: "1972-12-20",
+      title: "Địch đánh mạnh vào Hà Nội, Hải Phòng, Thái Nguyên",
       description:
-        "Không quân Mỹ tập trung tấn công vào các trận địa tên lửa ở Hà Nội với mật độ cao.",
+        "Tập kích dữ dội vào nhiều khu vực; phòng không ta đáp trả mạnh mẽ. Bắn rơi 7 B-52, 1 F-111 (bằng súng 14,5mm).",
     },
     {
-      date: "24/12/1972",
-      title: "Đêm Giáng sinh",
-      description: "Mỹ tạm ngừng ném bom vào Hà Nội trong đêm Giáng sinh.",
+      date: "1972-12-21",
+      title: "Địch tăng cường tấn công ngày và đêm",
+      description:
+        "Không quân Mỹ tiếp tục dồn lực tấn công. Ta bắn rơi 11 máy bay, gồm 3 B-52.",
     },
     {
-      date: "26/12/1972",
-      title: "Tái tập kích mạnh mẽ",
+      date: "1972-12-22",
+      title: "B-52 ném bom bệnh viện Bạch Mai",
       description:
-        "Mỹ tập trung lực lượng lớn tấn công trở lại, nhưng bị phòng không Việt Nam đánh trả mạnh mẽ.",
+        "Bệnh viện Bạch Mai bị ném bom, gây tổn thất lớn cho dân thường. Bắn rơi 2 B-52, thiệt hại dân sự lớn (28 người chết & bị thương).",
     },
     {
-      date: "27-28/12/1972",
-      title: "Những đòn cuối cùng",
+      date: "1972-12-23",
+      title: "Địch đánh sân bay, khu dân cư Hà Nội, Hải Phòng",
       description:
-        "Các đợt tấn công cuối cùng của không quân Mỹ tiếp tục bị phòng không Việt Nam đánh bại.",
+        "Tập trung ném bom các vị trí chiến lược và khu vực đông dân cư. Ta bắn rơi 4 máy bay, gồm 2 B-52.",
     },
     {
-      date: "29/12/1972",
-      title: "Kết thúc chiến dịch",
+      date: "1972-12-24",
+      title: "Không kích vào các mục tiêu chiến lược",
       description:
-        'Mỹ buộc phải chấm dứt các cuộc không kích bằng B-52 vào miền Bắc Việt Nam, đánh dấu chiến thắng "Điện Biên Phủ trên không".',
+        "Đợt không kích diễn ra đúng đêm Giáng sinh. Bắn rơi 5 máy bay, trong đó 1 B-52.",
     },
     {
-      date: "27/01/1973",
-      title: "Hiệp định Paris",
+      date: "1972-12-25",
+      title: "Mỹ tạm ngừng ném bom dịp Noel",
       description:
-        'Hiệp định Paris về chấm dứt chiến tranh và lập lại hòa bình ở Việt Nam được ký kết. Chiến thắng "Điện Biên Phủ trên không" đã góp phần quyết định vào kết quả này.',
+        "Không quân Mỹ ngừng hoạt động trong 36 giờ nhân dịp Giáng sinh. Ta tranh thủ rút kinh nghiệm, củng cố lực lượng.",
+    },
+    {
+      date: "1972-12-26",
+      title: "Đợt tập kích dữ dội nhất: đánh Khâm Thiên, Hai Bà Trưng",
+      description:
+        "Đợt ném bom khốc liệt nhất, đặc biệt tại Khâm Thiên. Bắn rơi 8 B-52, 10 máy bay chiến thuật; 287 người chết ở Khâm Thiên.",
+    },
+    {
+      date: "1972-12-27",
+      title: "Tấn công dữ dội Hà Nội",
+      description:
+        "Hà Nội tiếp tục là mục tiêu trọng điểm. Bắn rơi 14 máy bay, gồm 5 B-52.",
+    },
+    {
+      date: "1972-12-28",
+      title: "Phi công Vũ Xuân Thiều hy sinh khi tiêu diệt B-52",
+      description:
+        "Một trong những anh hùng tiêu biểu của chiến dịch. Bắn rơi 3 máy bay, gồm 2 B-52.",
+    },
+    {
+      date: "1972-12-29",
+      title: "Đánh vòng ngoài Hà Nội: Thái Nguyên, Thanh Hóa…",
+      description:
+        "Các đợt tấn công mở rộng ra ngoài vùng Hà Nội. Bắn rơi 2 máy bay (1 B-52, 1 F-4).",
+    },
+    {
+      date: "1972-12-30",
+      title: "Nixon tuyên bố ngừng ném bom miền Bắc",
+      description:
+        "Chiến dịch kết thúc; Mỹ ngừng ném bom và quay lại bàn đàm phán Paris.",
     },
   ];
 

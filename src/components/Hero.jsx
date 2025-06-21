@@ -4,7 +4,10 @@ const Hero = () => {
   return (
     <section
       className="relative h-screen flex items-center justify-center bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('https://i.imgur.com/HwNpbQJ.jpg')" }}
+      style={{
+        backgroundImage:
+          "url('https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/188208/Originals/ha-noi-12-ngay-dem-game-tai-hien-tran-dien-bien-phu-tren-khong-day-ac-liet%205.jpg')",
+      }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       <div

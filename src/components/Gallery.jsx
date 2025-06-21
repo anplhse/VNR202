@@ -3,27 +3,27 @@ import { useState } from "react";
 const Gallery = () => {
   const images = [
     {
-      url: "https://i.imgur.com/32CAHB3.jpg",
+      url: "https://i1-vnexpress.vnecdn.net/2012/12/19/sam-2-1355844890.jpg?w=500&h=0&q=100&dpr=1&fit=crop&s=_6reB5QxfYjB8wEXl4wgSg",
       caption: "Tên lửa phòng không Việt Nam khai hỏa",
     },
     {
-      url: "https://i.imgur.com/9Fo6K12.jpg",
+      url: "https://img.cand.com.vn/resize/800x800/NewFiles/Images/2022/12/19/may_bay-1671458134828.jpg",
       caption: "B-52 bị bắn rơi trên bầu trời Hà Nội",
     },
     {
-      url: "https://i.imgur.com/rYnCvLW.jpg",
+      url: "https://nhandan.vn/special/HaNoi12ngaydem/assets/XnUhJ4vceO/a33-900x1252.webp",
       caption: "Phi công Mỹ bị bắt sau khi nhảy dù",
     },
     {
-      url: "https://i.imgur.com/3DLbJGy.jpg",
+      url: "https://vnanet.vn/Data/Articles/2022/12/08/6482488/vna_potal_ky_niem_50_nam_chien_thang_%E2%80%9Cha_noi-dien_bien_phu_tren_khong%E2%80%9D_121972-122022_chien_thang_cua_y_chi_va_ban_linh_viet_nam_stand.jpg",
       caption: "Trận địa phòng không Việt Nam",
     },
     {
-      url: "https://i.imgur.com/pZvCHlk.jpg",
+      url: "https://hnm.1cdn.vn/2019/12/16/nhipsonghanoi.hanoimoi.com.vn-uploads-images-tuandiep-2019-12-16-_ham.jpg",
       caption: "Người dân Hà Nội trong hầm trú ẩn",
     },
     {
-      url: "https://i.imgur.com/HwNpbQJ.jpg",
+      url: "https://vnanet.vn/Data/Articles/2022/12/08/6482496/vna_potal_ky_niem_50_nam_chien_thang_%E2%80%9Cha_noi-dien_bien_phu_tren_khong%E2%80%9D_121972-122022_chien_thang_cua_y_chi_va_ban_linh_viet_nam_stand.jpg",
       caption: "Không quân Nhân dân Việt Nam sẵn sàng chiến đấu",
     },
   ];
@@ -63,24 +63,53 @@ const Gallery = () => {
           bảo vệ bầu trời Hà Nội tháng 12 năm 1972.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {images.map((image, index) => (
             <div
               key={index}
-              className="overflow-hidden rounded-lg shadow-md cursor-pointer transition-transform hover:scale-[1.02]"
+              className="group overflow-hidden rounded-lg shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               onClick={() => openLightbox(index)}
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >
-              <div className="relative aspect-w-16 aspect-h-9">
+              {/* Image Container với aspect ratio cố định */}
+              <div className="relative w-full h-64 md:h-72 bg-gray-200 overflow-hidden">
                 <img
                   src={image.url}
                   alt={image.caption}
-                  className="object-cover w-full h-full"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://via.placeholder.com/400x300/cccccc/666666?text=Image+Not+Found";
+                  }}
                 />
+                {/* Overlay hiệu ứng */}
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                {/* Icon zoom */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="bg-white bg-opacity-90 rounded-full p-3">
+                    <svg
+                      className="w-6 h-6 text-gray-800"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                      />
+                    </svg>
+                  </div>
+                </div>
               </div>
+
+              {/* Caption */}
               <div className="p-4 bg-gray-50">
-                <p className="text-gray-800 font-medium">{image.caption}</p>
+                <p className="text-gray-800 font-medium text-sm md:text-base leading-relaxed">
+                  {image.caption}
+                </p>
               </div>
             </div>
           ))}
@@ -88,10 +117,10 @@ const Gallery = () => {
 
         {/* Lightbox */}
         {selectedImage !== null && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
             <div className="relative max-w-6xl w-full">
               <button
-                className="absolute top-2 right-2 text-white p-2 z-10 hover:text-gray-300"
+                className="absolute top-4 right-4 text-white p-2 z-10 hover:text-gray-300 bg-black bg-opacity-50 rounded-full transition-colors"
                 onClick={closeLightbox}
               >
                 <svg
@@ -114,11 +143,11 @@ const Gallery = () => {
                 <img
                   src={images[selectedImage].url}
                   alt={images[selectedImage].caption}
-                  className="w-full h-auto max-h-[80vh] object-contain"
+                  className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
                 />
 
                 <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 text-white rounded-r-md hover:bg-opacity-75"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 p-3 text-white rounded-full hover:bg-opacity-90 transition-all"
                   onClick={() => navigateImage("prev")}
                 >
                   <svg
@@ -138,7 +167,7 @@ const Gallery = () => {
                 </button>
 
                 <button
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 text-white rounded-l-md hover:bg-opacity-75"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 p-3 text-white rounded-full hover:bg-opacity-90 transition-all"
                   onClick={() => navigateImage("next")}
                 >
                   <svg
@@ -158,9 +187,11 @@ const Gallery = () => {
                 </button>
               </div>
 
-              <div className="text-white text-center mt-4">
-                <p className="text-lg">{images[selectedImage].caption}</p>
-                <p className="text-sm text-gray-300">
+              <div className="text-white text-center mt-6 bg-black bg-opacity-50 rounded-lg p-4">
+                <p className="text-lg font-medium">
+                  {images[selectedImage].caption}
+                </p>
+                <p className="text-sm text-gray-300 mt-2">
                   Hình {selectedImage + 1} / {images.length}
                 </p>
               </div>
