@@ -186,34 +186,6 @@ const About = () => {
           </h3>
 
           <Game />
-
-          {/* Thông tin bổ sung về games */}
-          <div className="mt-8 bg-gradient-to-r from-monument-gold/10 to-monument-gold/5 p-6 rounded-xl border border-monument-gold/20">
-            <div className="text-center">
-              <h5 className="text-lg font-bold text-monument-gold mb-3">
-                🏆 Tính Năng Game
-              </h5>
-              <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-700 mb-4">
-                <div className="flex items-center justify-center">
-                  <span className="mr-2">🎮</span>
-                  <span>2 Game mini có thể chơi ngay</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="mr-2">🎯</span>
-                  <span>Điều khiển bằng chuột và bàn phím</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <span className="mr-2">🏅</span>
-                  <span>Hệ thống tính điểm theo thời gian thực</span>
-                </div>
-              </div>
-              <div className="bg-green-100 border border-green-300 rounded-lg p-3">
-                <p className="text-green-800 text-sm font-medium">
-                  ✅ Game đã hoạt động! Bạn có thể chơi ngay bây giờ!
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -6,7 +6,7 @@ const Memorial = () => {
   const memorials = [
     {
       name: "Bảo tàng Phòng không - Không quân",
-      location: "Số 173 Trường Chinh, Thanh Xuân, Hà Nội",
+      location: "173C Đ. Trường Chinh, Khương Mai, Thanh Xuân, Hà Nội",
       description:
         'Bảo tàng trưng bày các hiện vật quý giá về lịch sử phòng không - không quân Việt Nam, bao gồm mảnh vỡ B-52, tên lửa SAM-2, và các tư liệu về chiến thắng "Điện Biên Phủ trên không" tháng 12/1972.',
       image:
@@ -22,33 +22,36 @@ const Memorial = () => {
           "Tài liệu, hình ảnh về các phi công anh hùng",
         ],
         visitInfo: {
-          hours: "Thứ 3 - Chủ nhật: 8:00 - 17:00 (Thứ 2 nghỉ)",
-          ticket: "30.000 VNĐ/người lớn, 15.000 VNĐ/học sinh",
-          address: "173 Trường Chinh, Thanh Xuân, Hà Nội",
+          hours:
+            "Thứ 2 - Chủ nhật: 8:00-11:00 & 13:00-16:00 (Tham quan ngoài trời đến 18:30)",
+          ticket:
+            "Người lớn: 10.000 VNĐ, Trẻ từ 6 tuổi: 5.000 VNĐ, Dưới 6 tuổi: 2.000 VNĐ",
+          address: "173C Đ. Trường Chinh, Khương Mai, Thanh Xuân, Hà Nội",
         },
       },
     },
     {
-      name: "Xác máy bay B-52 tại Hồ Hữu Tiến",
-      location: "Ngõ Huyện, Hai Bà Trưng, Hà Nội",
+      name: "Xác máy bay B-52 tại Hồ Hữu Tiệp",
+      location: "Phường Ngọc Hà, Ba Đình, Hà Nội",
       description:
-        "Xác máy bay B-52G số hiệu 58-0188 bị bắn rơi đêm 27/12/1972, rơi xuống khu vực hồ Hữu Tiến. Đây là một trong 34 chiếc B-52 bị tiêu diệt trong chiến dịch, hiện được bảo tồn làm di tích lịch sử.",
+        "Xác máy bay B-52G số hiệu 58-0188 bị bắn rơi đêm 27/12/1972, rơi xuống khu vực hồ Hữu Tiệp. Đây là một trong 34 chiếc B-52 bị tiêu diệt trong chiến dịch, đã được Nhà nước công nhận là di tích lịch sử quốc gia.",
       image:
         "https://file3.qdnd.vn/data/images/0/2022/12/13/tuanson/6%201.jpg?dpi=150&quality=100&w=870",
       detailedInfo: {
         history:
-          "Đêm 27/12/1972, chiếc B-52G số hiệu 58-0188 thuộc Phi đoàn 43 của Không quân Mỹ bị tên lửa SAM-2 bắn rơi và rơi xuống khu vực hồ Hữu Tiến.",
+          "Đêm 27/12/1972, chiếc B-52G số hiệu 58-0188 thuộc Phi đoàn 43 của Không quân Mỹ bị tên lửa SAM-2 bắn rơi và rơi xuống khu vực hồ Hữu Tiệp. Đây là di tích lịch sử quốc gia được Nhà nước công nhận.",
         collections: [
           "Xác máy bay B-52G nguyên vẹn với nhiều bộ phận còn lại",
           "Động cơ máy bay nặng hàng tấn",
           "Các mảnh vỡ kim loại được bảo tồn",
           "Bảng thông tin chi tiết về chiếc máy bay",
           "Khu vực tưởng niệm được chỉnh trang",
+          "Biển báo di tích lịch sử quốc gia",
         ],
         visitInfo: {
           hours: "Mở cửa tự do 24/7",
           ticket: "Miễn phí tham quan",
-          address: "Ngõ Huyện, phường Nguyễn Du, Hai Bà Trưng, Hà Nội",
+          address: "Khu vực hồ Hữu Tiệp, phường Ngọc Hà, Ba Đình, Hà Nội",
         },
       },
     },
@@ -118,8 +121,8 @@ const Memorial = () => {
           "Phim tài liệu về chiến thắng",
         ],
         visitInfo: {
-          hours: "Thứ 2 - Chủ nhật: 8:30 - 17:00",
-          ticket: "20.000 VNĐ/người lớn, 10.000 VNĐ/học sinh",
+          hours: "Thứ 3, 4, 6, 7, CN: 8:00-11:00 & 13:30-16:30 (Thứ 2, 5 nghỉ)",
+          ticket: "Miễn phí tham quan",
           address: "157 Đội Cấn, Ba Đình, Hà Nội",
         },
       },

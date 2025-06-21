@@ -68,13 +68,13 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://qdnd.vn"
+                  href="https://nhandan.vn/special/hanoi-1972-nhung-ky-uc-khong-the-nao-quen/index.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-200 hover:text-monument-gold transition-colors flex items-start"
                 >
                   <span className="mr-2">📰</span>
-                  <span>Báo Quân đội Nhân dân</span>
+                  <span>Báo Nhân Dân - Những ký ức không thể nào quên</span>
                 </a>
               </li>
               <li>

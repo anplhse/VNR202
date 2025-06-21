@@ -4,25 +4,25 @@ const Timeline = () => {
       date: "1972-12-17",
       title: "Nixon ra lệnh tấn công miền Bắc Việt Nam",
       description:
-        "Tổng thống Nixon phát động chiến dịch tập kích miền Bắc bằng B-52.",
+        "Tổng thống Nixon ra lệnh mở cuộc tiến công bằng không quân vào miền Bắc Việt Nam, phát động chiến dịch Linebacker II với trọng tâm là sử dụng B-52",
     },
     {
       date: "1972-12-18",
       title: "Không quân Mỹ mở đầu đợt tập kích Hà Nội",
       description:
-        "B-52 bắt đầu ném bom vào Hà Nội và Hải Phòng, mở màn chiến dịch. Bắn rơi 3 B-52, trong đó 2 rơi tại chỗ.",
+        "Không quân Mỹ bắt đầu ném bom Hà Nội và Hải Phòng, mở màn chiến dịch. Trong ngày đầu, ta bắn rơi 3 máy bay B-52, trong đó 2 chiếc rơi tại chỗ",
     },
     {
       date: "1972-12-19",
-      title: "Địch tiếp tục ném bom Hà Nội, Hải Phòng, Bắc Giang…",
+      title: "Quân đội Mỹ tiếp tục ném bom Hà Nội, Hải Phòng, Bắc Giang",
       description:
-        "Các đợt ném bom vẫn tiếp diễn ở các mục tiêu trọng yếu. Ta bắn rơi 1 B-52, 1 F-4.",
+        "Địch tiếp tục ném bom các mục tiêu trọng yếu ở Hà Nội, Hải Phòng, Bắc Giang. Ta bắn rơi 1 B-52 và 1 máy bay chiến thuật F-4",
     },
     {
       date: "1972-12-20",
-      title: "Địch đánh mạnh vào Hà Nội, Hải Phòng, Thái Nguyên",
+      title: "Không quân Mỹ đánh mạnh vào Hà Nội, Hải Phòng, Thái Nguyên",
       description:
-        "Tập kích dữ dội vào nhiều khu vực; phòng không ta đáp trả mạnh mẽ. Bắn rơi 7 B-52, 1 F-111 (bằng súng 14,5mm).",
+        "Địch đánh mạnh vào Hà Nội, Hải Phòng, Thái Nguyên. Phòng không ta đáp trả quyết liệt, bắn rơi 7 B-52 (5 chiếc rơi tại chỗ) và 1 máy bay F-111",
     },
     {
       date: "1972-12-21",
@@ -58,13 +58,13 @@ const Timeline = () => {
       date: "1972-12-26",
       title: "Đợt tập kích dữ dội nhất: đánh Khâm Thiên, Hai Bà Trưng",
       description:
-        "Đợt ném bom khốc liệt nhất, đặc biệt tại Khâm Thiên. Bắn rơi 8 B-52, 10 máy bay chiến thuật; 287 người chết ở Khâm Thiên.",
+        "Đợt ném bom khốc liệt nhất, đặc biệt tại Khâm Thiên. Bắn rơi 8 B-52, 10 máy bay chiến thuật. 287 người chết ở Khâm Thiên.",
     },
     {
       date: "1972-12-27",
       title: "Tấn công dữ dội Hà Nội",
       description:
-        "Hà Nội tiếp tục là mục tiêu trọng điểm. Bắn rơi 14 máy bay, gồm 5 B-52.",
+        "Hà Nội tiếp tục là mục tiêu trọng điểm. Bắn rơi 14 máy bay, gồm 5 B-52. Ngày này cũng ghi nhận phi công Phạm Tuân bắn rơi B-52 bằng tên lửa không đối không lần đầu tiên trong lịch sử",
     },
     {
       date: "1972-12-28",
@@ -74,7 +74,7 @@ const Timeline = () => {
     },
     {
       date: "1972-12-29",
-      title: "Đánh vòng ngoài Hà Nội: Thái Nguyên, Thanh Hóa…",
+      title: "Đánh vòng ngoài Hà Nội: Thái Nguyên, Thanh Hóa",
       description:
         "Các đợt tấn công mở rộng ra ngoài vùng Hà Nội. Bắn rơi 2 máy bay (1 B-52, 1 F-4).",
     },
@@ -82,7 +82,7 @@ const Timeline = () => {
       date: "1972-12-30",
       title: "Nixon tuyên bố ngừng ném bom miền Bắc",
       description:
-        "Chiến dịch kết thúc; Mỹ ngừng ném bom và quay lại bàn đàm phán Paris.",
+        "Chiến dịch kết thúc. Mỹ ngừng ném bom và quay lại bàn đàm phán Paris.",
     },
   ];
 

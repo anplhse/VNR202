@@ -18,19 +18,19 @@ const Heroes = () => {
     },
     {
       name: "Nguyễn Đức Soát",
-      role: "Đại tá, Chỉ huy trung đoàn pháo phòng không",
+      role: "Trung tướng, Phi công tiêm kích MiG-21 ",
       achievement:
-        "Chỉ huy lực lượng pháo phòng không 57mm và 37mm bắn rơi nhiều B-52",
+        "Anh hùng LLVTND, nguyên Phó Tổng Tham mưu trưởng, phi công xuất sắc với 6 lần bắn rơi máy bay Mỹ",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Nguyen_Duc_Soat_2007.jpg/250px-Nguyen_Duc_Soat_2007.jpg",
     },
     {
-      name: "Trần Văn Lai",
-      role: "Phi công tiêm kích MiG-21",
+      name: "Nguyễn Đình Kiên",
+      role: "Đại tá, Sư đoàn trưởng 361 Phòng không",
       achievement:
-        "Anh hùng lực lượng vũ trang nhân dân, bắn rơi nhiều máy bay địch trong chiến dịch",
+        "Chỉ huy lực lượng pháo phòng không 57mm và 37mm, trực tiếp bắn rơi 4 máy bay B-52",
       image:
-        "https://image.baophapluat.vn/w840/Uploaded/2025/athlraqhpghat/2018_07_29/ong_tran_van_lai_SLOG.jpg",
+        "https://special.nhandan.vn/su-menh-bao-ve-bau-troi/assets/TQE7RC3Xzt/1158a12372d8cb8692c9-2048x1365.jpg",
     },
   ];
 
@@ -75,9 +75,10 @@ const Heroes = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 <div className="absolute top-3 left-3 bg-victory-red/90 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
-                  {hero.role.includes("Phi công")
+                  {hero.role.includes("Phi công") ||
+                  hero.role.includes("MiG-21")
                     ? "✈️ Phi công"
-                    : "🎯 Chỉ huy"}
+                    : "🎯 Sư đoàn trưởng"}
                 </div>
               </div>
 

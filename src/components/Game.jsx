@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const Game = () => {
   const [currentGame, setCurrentGame] = useState(null);
@@ -15,325 +15,378 @@ const Game = () => {
     <>
       {/* Game Selection */}
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Game 1: Phòng không Hà Nội */}
+        {/* Game 1: Quiz Lịch Sử */}
         <div className="bg-gradient-to-br from-victory-red/5 to-victory-red/10 p-8 rounded-2xl border-2 border-victory-red/20 hover:border-victory-red/40 transition-all duration-300 hover:shadow-xl group">
           <div className="text-center mb-6">
             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-              🚀
+              🧠
             </div>
             <h4 className="text-2xl font-bold text-victory-red mb-3">
-              Phòng Không Hà Nội
+              Quiz Lịch Sử Điện Biên Phủ Trên Không
             </h4>
-            <p className="text-gray-700 mb-6">
-              Trở thành chỉ huy trận địa SAM-2, bắn rơi máy bay B-52 xâm lược.
-              Trải nghiệm cảm giác căng thẳng và vinh quang của các chiến sĩ
-              phòng không.
-            </p>
           </div>
 
           <div className="bg-white/50 p-4 rounded-lg mb-6">
             <h5 className="font-semibold text-history-blue mb-2">
-              🎯 Nhiệm vụ:
+              🎯 Nội dung quiz:
             </h5>
             <ul className="text-sm text-gray-700 space-y-1">
-              <li>• Điều khiển tên lửa SAM-2 bắn B-52</li>
-              <li>• Bảo vệ các mục tiêu quan trọng</li>
-              <li>• Đạt được 34 chiếc B-52 bị bắn rơi</li>
-              <li>• Trải nghiệm 12 ngày đêm lịch sử</li>
+              <li>• Ngày tháng và sự kiện quan trọng</li>
+              <li>• Các anh hùng và nhân vật lịch sử</li>
+              <li>• Số liệu thống kê chính xác</li>
+              <li>• Địa điểm và di tích lịch sử</li>
             </ul>
           </div>
 
           <button
             className="w-full bg-victory-red hover:bg-red-600 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-            onClick={() => openGame("air-defense")}
+            onClick={() => openGame("history-quiz")}
           >
-            🎮 Bắt Đầu Chiến Đấu
+            🎮 Bắt Đầu Quiz
           </button>
         </div>
 
-        {/* Game 2: Phi công MiG-21 */}
+        {/* Game 2: Quiz Anh Hùng */}
         <div className="bg-gradient-to-br from-history-blue/5 to-history-blue/10 p-8 rounded-2xl border-2 border-history-blue/20 hover:border-history-blue/40 transition-all duration-300 hover:shadow-xl group">
           <div className="text-center mb-6">
             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-              ✈️
+              🏆
             </div>
             <h4 className="text-2xl font-bold text-history-blue mb-3">
-              Phi Công MiG-21
+              Quiz Anh Hùng & Chiến Công
             </h4>
-            <p className="text-gray-700 mb-6">
-              Lái máy bay tiêm kích MiG-21, trở thành anh hùng như Phạm Tuân.
-              Đối đầu trực tiếp với "pháo đài bay" B-52 trên bầu trời Hà Nội.
-            </p>
           </div>
 
           <div className="bg-white/50 p-4 rounded-lg mb-6">
-            <h5 className="font-semibold text-victory-red mb-2">
-              🎯 Nhiệm vụ:
-            </h5>
+            <h5 className="font-semibold text-victory-red mb-2">🎯 Chủ đề:</h5>
             <ul className="text-sm text-gray-700 space-y-1">
-              <li>• Điều khiển MiG-21 đánh chặn B-52</li>
-              <li>• Sử dụng tên lửa không đối không</li>
-              <li>• Tránh hỏa lực phòng thủ của địch</li>
-              <li>• Trở thành phi công anh hùng</li>
+              <li>• Phi công Phạm Tuân và MiG-21</li>
+              <li>• Anh hùng Vũ Xuân Thiều</li>
+              <li>• Nguyễn Đức Soát và các phi công</li>
+              <li>• Sư đoàn trưởng Nguyễn Đình Kiên</li>
             </ul>
           </div>
 
           <button
             className="w-full bg-history-blue hover:bg-blue-600 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-            onClick={() => openGame("fighter-pilot")}
+            onClick={() => openGame("heroes-quiz")}
           >
-            🎮 Cất Cánh Ngay
+            🎮 Khám Phá Anh Hùng
           </button>
         </div>
       </div>
 
       {/* Game Modals */}
-      {currentGame === "air-defense" && <AirDefenseGame onClose={closeGame} />}
-      {currentGame === "fighter-pilot" && (
-        <FighterPilotGame onClose={closeGame} />
+      {currentGame === "history-quiz" && (
+        <HistoryQuizGame onClose={closeGame} />
       )}
+      {currentGame === "heroes-quiz" && <HeroesQuizGame onClose={closeGame} />}
     </>
   );
 };
 
-// Game 1: Air Defense Game
-const AirDefenseGame = ({ onClose }) => {
-  const canvasRef = useRef(null);
+// Game 1: Quiz Lịch Sử
+const HistoryQuizGame = ({ onClose }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const [gameRunning, setGameRunning] = useState(false);
-  const [missiles, setMissiles] = useState([]);
-  const [bombers, setBombers] = useState([]);
-  const [explosions, setExplosions] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
+  const [userAnswers, setUserAnswers] = useState([]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationId;
+  const questions = [
+    {
+      question:
+        "Chiến dịch 'Điện Biên Phủ trên không' diễn ra trong bao nhiêu ngày?",
+      options: ["10 ngày", "12 ngày", "15 ngày", "20 ngày"],
+      correct: 1,
+      explanation: "Chiến dịch diễn ra từ 18-29/12/1972, kéo dài 12 ngày đêm.",
+    },
+    {
+      question:
+        "Tên chính thức của chiến dịch không kích do Mỹ phát động là gì?",
+      options: ["Rolling Thunder", " Linebacker II", " Arc Light", " Niagara"],
+      correct: 1,
+      explanation:
+        " Linebacker II là tên chính thức của chiến dịch không kích miền Bắc Việt Nam tháng 12/1972.",
+    },
+    {
+      question: "Có bao nhiêu máy bay B-52 bị bắn rơi trong 12 ngày đêm?",
+      options: ["30 chiếc", "34 chiếc", "40 chiếc", "45 chiếc"],
+      correct: 1,
+      explanation:
+        "Tổng cộng 34 máy bay B-52 bị bắn rơi, đây là con số chính thức từ các tài liệu lịch sử.",
+    },
+    {
+      question:
+        "Phi công nào đầu tiên bắn rơi B-52 bằng tên lửa không đối không?",
+      options: ["Vũ Xuân Thiều", "Phạm Tuân", "Nguyễn Văn Cốc", "Trần Văn Lai"],
+      correct: 1,
+      explanation:
+        "Phi công Phạm Tuân lái MiG-21 số hiệu 5121 bắn rơi B-52 đầu tiên vào đêm 27/12/1972.",
+    },
+    {
+      question:
+        "Bao nhiêu người dân vô tội thiệt mạng trong vụ ném bom phố Khâm Thiên?",
+      options: ["200 người", "250 người", "287 người", "300 người"],
+      correct: 2,
+      explanation:
+        "287 người dân vô tội thiệt mạng trong đêm 26/12/1972 khi B-52 ném bom phố Khâm Thiên.",
+    },
+    {
+      question:
+        "Loại tên lửa đất đối không chủ lực của Việt Nam trong chiến dịch là gì?",
+      options: ["SA-3 Goa", "SAM-2 (SA-2)", "SA-6 Gainful", "SA-7 Grail"],
+      correct: 1,
+      explanation:
+        "SAM-2 (SA-2 Guideline) là loại tên lửa đất đối không chủ lực bắn rơi B-52.",
+    },
+    {
+      question:
+        "Đêm nào được coi là khốc liệt nhất với 8 chiếc B-52 bị bắn rơi?",
+      options: ["26/12/1972", "27/12/1972", "28/12/1972", "20/12/1972"],
+      correct: 0,
+      explanation:
+        "Đêm 26/12/1972 là đêm khốc liệt nhất với 8 chiếc B-52 bị bắn rơi, đồng thời xảy ra thảm sát Khâm Thiên.",
+    },
+    {
+      question: "Phi công Vũ Xuân Thiều hy sinh vào ngày nào?",
+      options: ["26/12/1972", "27/12/1972", "28/12/1972", "29/12/1972"],
+      correct: 2,
+      explanation:
+        "Phi công Vũ Xuân Thiều hy sinh anh dũng vào ngày 28/12/1972 khi lao máy bay vào B-52.",
+    },
+    {
+      question:
+        "Tổng số máy bay Mỹ các loại bị bắn rơi trong chiến dịch là bao nhiêu?",
+      options: ["75 chiếc", "81 chiếc", "90 chiếc", "100 chiếc"],
+      correct: 1,
+      explanation:
+        "Tổng cộng 81 máy bay Mỹ bị bắn rơi, trong đó có 34 B-52 và 47 máy bay các loại khác.",
+    },
+    {
+      question: "Hiệp định nào được ký kết sau chiến thắng này?",
+      options: [
+        "Hiệp định Geneva",
+        "Hiệp định Paris",
+        "Hiệp định Potsdam",
+        "Hiệp định Camp David",
+      ],
+      correct: 1,
+      explanation:
+        "Hiệp định Paris về chấm dứt chiến tranh và lập lại hòa bình ở Việt Nam được ký ngày 27/1/1973.",
+    },
+  ];
 
-    const gameLoop = () => {
-      // Clear canvas
-      ctx.fillStyle = "#1a202c";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const handleAnswerSelect = (answerIndex) => {
+    setSelectedAnswer(answerIndex);
+  };
 
-      // Draw stars
-      ctx.fillStyle = "#ffffff";
-      for (let i = 0; i < 50; i++) {
-        const x = (i * 37) % canvas.width;
-        const y = (i * 23) % canvas.height;
-        ctx.fillRect(x, y, 1, 1);
-      }
-
-      // Draw ground
-      ctx.fillStyle = "#2d5016";
-      ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
-
-      // Draw SAM launcher
-      ctx.fillStyle = "#4a5568";
-      ctx.fillRect(50, canvas.height - 80, 20, 30);
-      ctx.fillStyle = "#e53e3e";
-      ctx.fillRect(55, canvas.height - 85, 10, 10);
-
-      // Update and draw bombers
-      setBombers((prev) =>
-        prev
-          .map((bomber) => ({
-            ...bomber,
-            x: bomber.x + bomber.vx,
-            y: bomber.y + bomber.vy,
-          }))
-          .filter((bomber) => bomber.x < canvas.width + 50)
-      );
-
-      bombers.forEach((bomber) => {
-        ctx.fillStyle = "#718096";
-        ctx.fillRect(bomber.x, bomber.y, 40, 8);
-        ctx.fillRect(bomber.x + 10, bomber.y - 3, 20, 3);
-      });
-
-      // Update and draw missiles
-      setMissiles((prev) =>
-        prev
-          .map((missile) => ({
-            ...missile,
-            x: missile.x + missile.vx,
-            y: missile.y + missile.vy,
-          }))
-          .filter((missile) => missile.y > 0)
-      );
-
-      missiles.forEach((missile) => {
-        ctx.fillStyle = "#f56565";
-        ctx.fillRect(missile.x, missile.y, 3, 12);
-
-        // Trail effect
-        ctx.fillStyle = "#fed7d7";
-        ctx.fillRect(missile.x - 1, missile.y + 12, 5, 8);
-      });
-
-      // Check collisions
-      missiles.forEach((missile, mIndex) => {
-        bombers.forEach((bomber, bIndex) => {
-          const distance = Math.sqrt(
-            Math.pow(missile.x - bomber.x - 20, 2) +
-              Math.pow(missile.y - bomber.y - 4, 2)
-          );
-
-          if (distance < 25) {
-            // Hit!
-            setExplosions((prev) => [
-              ...prev,
-              {
-                x: bomber.x + 20,
-                y: bomber.y + 4,
-                timer: 30,
-              },
-            ]);
-
-            setScore((prev) => prev + 10);
-            setBombers((prev) => prev.filter((_, i) => i !== bIndex));
-            setMissiles((prev) => prev.filter((_, i) => i !== mIndex));
-          }
-        });
-      });
-
-      // Update and draw explosions
-      setExplosions((prev) =>
-        prev
-          .map((exp) => ({
-            ...exp,
-            timer: exp.timer - 1,
-          }))
-          .filter((exp) => exp.timer > 0)
-      );
-
-      explosions.forEach((explosion) => {
-        const size = 30 - explosion.timer;
-        ctx.fillStyle = `rgba(255, ${255 - explosion.timer * 8}, 0, ${
-          explosion.timer / 30
-        })`;
-        ctx.beginPath();
-        ctx.arc(explosion.x, explosion.y, size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      if (gameRunning) {
-        animationId = requestAnimationFrame(gameLoop);
-      }
-    };
-
-    if (gameRunning) {
-      gameLoop();
+  const handleNextQuestion = () => {
+    const isCorrect = selectedAnswer === questions[currentQuestion].correct;
+    if (isCorrect) {
+      setScore(score + 1);
     }
 
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-  }, [gameRunning, missiles, bombers, explosions]);
-
-  // Spawn bombers
-  useEffect(() => {
-    if (!gameRunning) return;
-
-    const spawnBomber = () => {
-      setBombers((prev) => [
-        ...prev,
-        {
-          x: -50,
-          y: 50 + Math.random() * 100,
-          vx: 1 + Math.random(),
-          vy: 0,
-        },
-      ]);
-    };
-
-    const interval = setInterval(spawnBomber, 2000);
-    return () => clearInterval(interval);
-  }, [gameRunning]);
-
-  const startGame = () => {
-    setGameRunning(true);
-    setScore(0);
-    setMissiles([]);
-    setBombers([]);
-    setExplosions([]);
-  };
-
-  const fireMissile = (e) => {
-    if (!gameRunning) return;
-
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const targetX = e.clientX - rect.left;
-    const targetY = e.clientY - rect.top;
-
-    const startX = 60;
-    const startY = canvas.height - 85;
-
-    const distance = Math.sqrt(
-      Math.pow(targetX - startX, 2) + Math.pow(targetY - startY, 2)
-    );
-    const speed = 5;
-
-    setMissiles((prev) => [
-      ...prev,
+    setUserAnswers([
+      ...userAnswers,
       {
-        x: startX,
-        y: startY,
-        vx: ((targetX - startX) / distance) * speed,
-        vy: ((targetY - startY) / distance) * speed,
+        question: currentQuestion,
+        selected: selectedAnswer,
+        correct: questions[currentQuestion].correct,
+        isCorrect: isCorrect,
       },
     ]);
+
+    setShowResult(true);
+
+    setTimeout(() => {
+      if (currentQuestion + 1 < questions.length) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(null);
+        setShowResult(false);
+      } else {
+        setGameFinished(true);
+      }
+    }, 2000);
   };
 
+  const resetGame = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setSelectedAnswer(null);
+    setShowResult(false);
+    setGameFinished(false);
+    setUserAnswers([]);
+  };
+
+  const getScoreMessage = () => {
+    const percentage = (score / questions.length) * 100;
+    if (percentage >= 90) return "🏆 Xuất sắc! Bạn là chuyên gia lịch sử!";
+    if (percentage >= 70) return "🎖️ Tốt lắm! Kiến thức vững vàng!";
+    if (percentage >= 50) return "👍 Khá tốt! Hãy học thêm nhé!";
+    return "📚 Cần cố gắng hơn! Đọc thêm tài liệu lịch sử!";
+  };
+
+  if (gameFinished) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto">
+          <div className="p-8 text-center">
+            <h2 className="text-3xl font-bold text-history-blue mb-4">
+              🎉 Hoàn thành Quiz!
+            </h2>
+            <div className="text-6xl mb-4">
+              {score >= 7 ? "🏆" : score >= 5 ? "🎖️" : "📚"}
+            </div>
+            <div className="text-4xl font-bold text-victory-red mb-2">
+              {score}/{questions.length}
+            </div>
+            <div className="text-xl text-gray-700 mb-6">
+              {getScoreMessage()}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              <div className="bg-green-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-green-600">{score}</div>
+                <div className="text-sm text-gray-600">Câu đúng</div>
+              </div>
+              <div className="bg-red-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-red-600">
+                  {questions.length - score}
+                </div>
+                <div className="text-sm text-gray-600">Câu sai</div>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-blue-600">
+                  {Math.round((score / questions.length) * 100)}%
+                </div>
+                <div className="text-sm text-gray-600">Điểm số</div>
+              </div>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={resetGame}
+                className="bg-victory-red hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold"
+              >
+                🔄 Chơi lại
+              </button>
+              <button
+                onClick={onClose}
+                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-bold"
+              >
+                Thoát
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto">
         <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-history-blue">
-              🚀 Phòng Không Hà Nội
+              🧠 Quiz Lịch Sử
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
             >
               ×
             </button>
           </div>
 
-          <div className="mb-4 flex justify-between items-center">
-            <div className="text-lg font-semibold">Điểm: {score}</div>
-            {!gameRunning ? (
-              <button
-                onClick={startGame}
-                className="bg-victory-red hover:bg-red-600 text-white px-6 py-2 rounded-lg font-bold"
-              >
-                Bắt Đầu Chiến Đấu
-              </button>
-            ) : (
-              <div className="text-sm text-gray-600">
-                Click để bắn tên lửa SAM-2!
+          <div className="mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm text-gray-600">
+                Câu {currentQuestion + 1}/{questions.length}
+              </span>
+              <span className="text-sm text-gray-600">
+                Điểm: {score}/{currentQuestion + (showResult ? 1 : 0)}
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-victory-red h-2 rounded-full transition-all duration-300"
+                style={{
+                  width: `${
+                    ((currentQuestion + (showResult ? 1 : 0)) /
+                      questions.length) *
+                    100
+                  }%`,
+                }}
+              ></div>
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
+              {questions[currentQuestion].question}
+            </h3>
+
+            {/* Hiển thị tất cả các lựa chọn rõ ràng ngay từ đầu */}
+            <div className="space-y-3">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswerSelect(index)}
+                  disabled={showResult}
+                  className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 font-medium ${
+                    showResult
+                      ? index === questions[currentQuestion].correct
+                        ? "bg-green-100 border-green-500 text-green-800"
+                        : index === selectedAnswer &&
+                          selectedAnswer !== questions[currentQuestion].correct
+                        ? "bg-red-100 border-red-500 text-red-800"
+                        : "bg-white border-gray-300 text-gray-600"
+                      : selectedAnswer === index
+                      ? "bg-victory-red text-white border-victory-red shadow-md"
+                      : "bg-white border-gray-300 text-gray-800 hover:border-victory-red hover:bg-victory-red/5 hover:shadow-sm"
+                  }`}
+                >
+                  <span className="font-bold mr-3 text-lg">
+                    {String.fromCharCode(65 + index)}.
+                  </span>
+                  <span className="text-base">{option}</span>
+                </button>
+              ))}
+            </div>
+
+            {showResult && (
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-blue-800 font-medium mb-2">
+                  {selectedAnswer === questions[currentQuestion].correct
+                    ? "✅ Chính xác!"
+                    : "❌ Chưa đúng!"}
+                </p>
+                <p className="text-blue-700 text-sm">
+                  <strong>Giải thích:</strong>{" "}
+                  {questions[currentQuestion].explanation}
+                </p>
               </div>
             )}
           </div>
 
-          <canvas
-            ref={canvasRef}
-            width={800}
-            height={400}
-            className="border border-gray-300 rounded-lg cursor-crosshair w-full"
-            onClick={fireMissile}
-          />
-
-          <div className="mt-4 text-sm text-gray-600">
-            <p>
-              🎯 Hướng dẫn: Click chuột để bắn tên lửa SAM-2 vào máy bay B-52
-            </p>
-            <p>
-              🏆 Mục tiêu: Bắn rơi càng nhiều B-52 càng tốt để bảo vệ Hà Nội!
-            </p>
+          <div className="flex justify-center">
+            <button
+              onClick={handleNextQuestion}
+              disabled={selectedAnswer === null || showResult}
+              className={`px-8 py-3 rounded-lg font-bold transition-all duration-200 ${
+                selectedAnswer !== null && !showResult
+                  ? "bg-victory-red hover:bg-red-600 text-white"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+            >
+              {currentQuestion + 1 === questions.length
+                ? "Hoàn thành"
+                : "Câu tiếp theo"}{" "}
+              →
+            </button>
           </div>
         </div>
       </div>
@@ -341,226 +394,307 @@ const AirDefenseGame = ({ onClose }) => {
   );
 };
 
-// Game 2: Fighter Pilot Game
-const FighterPilotGame = ({ onClose }) => {
-  const canvasRef = useRef(null);
+// Game 2: Quiz Anh Hùng
+const HeroesQuizGame = ({ onClose }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const [gameRunning, setGameRunning] = useState(false);
-  const [player, setPlayer] = useState({ x: 100, y: 200 });
-  const [bullets, setBullets] = useState([]);
-  const [enemies, setEnemies] = useState([]);
-  const [keys, setKeys] = useState({});
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      setKeys((prev) => ({ ...prev, [e.key]: true }));
-    };
+  const questions = [
+    {
+      question:
+        "Phi công Phạm Tuân bay từ sân bay nào khi bắn rơi B-52 đầu tiên?",
+      options: ["Nội Bài", "Yên Bái", "Cát Bi", "Gia Lam"],
+      correct: 1,
+      explanation:
+        "Phi công Phạm Tuân cất cánh từ sân bay Yên Bái đêm 27/12/1972.",
+    },
+    {
+      question: "Vũ Xuân Thiều được phong tặng danh hiệu gì?",
+      options: [
+        "Anh hùng LLVTND",
+        "Chiến sĩ thi đua",
+        "Anh hùng Lao động",
+        "Bậc thầy không quân",
+      ],
+      correct: 0,
+      explanation:
+        "Vũ Xuân Thiều được phong tặng danh hiệu Anh hùng Lực lượng vũ trang nhân dân.",
+    },
+    {
+      question: "Loại pháo nào được sử dụng nhiều nhất trong phòng không?",
+      options: ["37mm", "57mm", "85mm", "100mm"],
+      correct: 1,
+      explanation:
+        "Pháo 57mm là loại pháo phòng không được sử dụng nhiều nhất và hiệu quả cao.",
+    },
+    {
+      question: "Phi công Vũ Xuân Thiều hy sinh theo cách nào?",
+      options: [
+        "Bị bắn rơi bởi tên lửa",
+        "Lao máy bay vào B-52",
+        "Nhảy dù không thành công",
+        "Tai nạn khi hạ cánh",
+      ],
+      correct: 1,
+      explanation:
+        "Phi công Vũ Xuân Thiều đã lao máy bay MiG-21 vào B-52 để tiêu diệt mục tiêu, thể hiện tinh thần hy sinh cao cả.",
+    },
+    {
+      question: "MiG-21 có tên mã NATO là gì?",
+      options: ["Fishbed", "Flogger", "Fulcrum", "Flanker"],
+      correct: 0,
+      explanation:
+        "MiG-21 có tên mã NATO là 'Fishbed', máy bay tiêm kích chủ lực của Việt Nam.",
+    },
+    {
+      question: "Tên lửa SAM-2 có tầm bắn tối đa bao nhiêu km?",
+      options: ["25 km", "30 km", "35 km", "40 km"],
+      correct: 2,
+      explanation:
+        "Tên lửa SAM-2 có tầm bắn tối đa khoảng 35 km và độ cao 27 km.",
+    },
+    {
+      question:
+        "Đại tá nào chỉ huy Sư đoàn 361 Phòng không bắn rơi nhiều B-52?",
+      options: ["Nguyễn Đình Kiên", "Võ Văn Vệ", "Phạm Văn Đồng", "Lê Văn Tám"],
+      correct: 0,
+      explanation:
+        "Đại tá Nguyễn Đình Kiên, Sư đoàn trưởng 361 Phòng không, trực tiếp bắn rơi 4 máy bay B-52.",
+    },
+    {
+      question: "B-52 có biệt danh là gì?",
+      options: [
+        "Flying Fortress",
+        "Stratofortress",
+        "Superfortress",
+        "Sky Fortress",
+      ],
+      correct: 1,
+      explanation:
+        "B-52 có tên đầy đủ là B-52 Stratofortress, được gọi là 'pháo đài bay'.",
+    },
+    {
+      question: "Phi công Phạm Tuân sau này trở thành gì?",
+      options: ["Tướng không quân", "Phi hành gia", "Chính trị gia", "Giáo sư"],
+      correct: 1,
+      explanation:
+        "Phạm Tuân sau này trở thành phi hành gia đầu tiên của Việt Nam (1980).",
+    },
+    {
+      question: "Trung tướng Nguyễn Đức Soát nổi tiếng với vai trò gì?",
+      options: [
+        "Chỉ huy pháo phòng không",
+        "Phi công tiêm kích MiG-21 ",
+        "Tư lệnh tên lửa SAM-2",
+        "Chỉ huy radar phòng không",
+      ],
+      correct: 1,
+      explanation:
+        "Trung tướng Nguyễn Đức Soát là phi công tiêm kích MiG-21 xuất sắc, được phong danh hiệu Ace với 6 lần bắn rơi máy bay Mỹ.",
+    },
+  ];
 
-    const handleKeyUp = (e) => {
-      setKeys((prev) => ({ ...prev, [e.key]: false }));
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationId;
-
-    const gameLoop = () => {
-      // Clear canvas
-      ctx.fillStyle = "#4299e1";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Draw clouds
-      ctx.fillStyle = "#ffffff";
-      for (let i = 0; i < 10; i++) {
-        const x = (i * 80 + Date.now() / 50) % (canvas.width + 100);
-        const y = 50 + ((i * 30) % 100);
-        ctx.beginPath();
-        ctx.arc(x, y, 15, 0, Math.PI * 2);
-        ctx.arc(x + 20, y, 20, 0, Math.PI * 2);
-        ctx.arc(x + 40, y, 15, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Update player position
-      setPlayer((prev) => {
-        let newX = prev.x;
-        let newY = prev.y;
-
-        if (keys["ArrowLeft"] && newX > 0) newX -= 3;
-        if (keys["ArrowRight"] && newX < canvas.width - 30) newX += 3;
-        if (keys["ArrowUp"] && newY > 0) newY -= 3;
-        if (keys["ArrowDown"] && newY < canvas.height - 20) newY += 3;
-
-        return { x: newX, y: newY };
-      });
-
-      // Draw player (MiG-21)
-      ctx.fillStyle = "#38a169";
-      ctx.fillRect(player.x, player.y, 30, 15);
-      ctx.fillRect(player.x + 25, player.y + 5, 10, 5);
-
-      // Update bullets
-      setBullets((prev) =>
-        prev
-          .map((bullet) => ({
-            ...bullet,
-            x: bullet.x + 8,
-          }))
-          .filter((bullet) => bullet.x < canvas.width)
-      );
-
-      // Draw bullets
-      bullets.forEach((bullet) => {
-        ctx.fillStyle = "#ffd700";
-        ctx.fillRect(bullet.x, bullet.y, 8, 2);
-      });
-
-      // Update enemies
-      setEnemies((prev) =>
-        prev
-          .map((enemy) => ({
-            ...enemy,
-            x: enemy.x - 2,
-          }))
-          .filter((enemy) => enemy.x > -60)
-      );
-
-      // Draw enemies (B-52)
-      enemies.forEach((enemy) => {
-        ctx.fillStyle = "#4a5568";
-        ctx.fillRect(enemy.x, enemy.y, 50, 12);
-        ctx.fillRect(enemy.x + 10, enemy.y - 3, 30, 3);
-      });
-
-      // Check collisions
-      bullets.forEach((bullet, bIndex) => {
-        enemies.forEach((enemy, eIndex) => {
-          if (
-            bullet.x > enemy.x &&
-            bullet.x < enemy.x + 50 &&
-            bullet.y > enemy.y &&
-            bullet.y < enemy.y + 12
-          ) {
-            setScore((prev) => prev + 20);
-            setBullets((prev) => prev.filter((_, i) => i !== bIndex));
-            setEnemies((prev) => prev.filter((_, i) => i !== eIndex));
-          }
-        });
-      });
-
-      if (gameRunning) {
-        animationId = requestAnimationFrame(gameLoop);
-      }
-    };
-
-    if (gameRunning) {
-      gameLoop();
-    }
-
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-  }, [gameRunning, player, bullets, enemies, keys]);
-
-  // Spawn enemies
-  useEffect(() => {
-    if (!gameRunning) return;
-
-    const spawnEnemy = () => {
-      setEnemies((prev) => [
-        ...prev,
-        {
-          x: 800,
-          y: 50 + Math.random() * 200,
-        },
-      ]);
-    };
-
-    const interval = setInterval(spawnEnemy, 3000);
-    return () => clearInterval(interval);
-  }, [gameRunning]);
-
-  // Auto fire
-  useEffect(() => {
-    if (!gameRunning) return;
-
-    const fire = () => {
-      setBullets((prev) => [
-        ...prev,
-        {
-          x: player.x + 30,
-          y: player.y + 7,
-        },
-      ]);
-    };
-
-    const interval = setInterval(fire, 500);
-    return () => clearInterval(interval);
-  }, [gameRunning, player]);
-
-  const startGame = () => {
-    setGameRunning(true);
-    setScore(0);
-    setPlayer({ x: 100, y: 200 });
-    setBullets([]);
-    setEnemies([]);
+  const handleAnswerSelect = (answerIndex) => {
+    setSelectedAnswer(answerIndex);
   };
 
+  const handleNextQuestion = () => {
+    const isCorrect = selectedAnswer === questions[currentQuestion].correct;
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
+    setShowResult(true);
+
+    setTimeout(() => {
+      if (currentQuestion + 1 < questions.length) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(null);
+        setShowResult(false);
+      } else {
+        setGameFinished(true);
+      }
+    }, 2000);
+  };
+
+  const resetGame = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setSelectedAnswer(null);
+    setShowResult(false);
+    setGameFinished(false);
+  };
+
+  const getScoreMessage = () => {
+    const percentage = (score / questions.length) * 100;
+    if (percentage >= 90) return "🏆 Anh hùng thực thụ! Kiến thức xuất sắc!";
+    if (percentage >= 70) return "🎖️ Chiến sĩ giỏi! Hiểu biết sâu sắc!";
+    if (percentage >= 50) return "👍 Tốt! Cần tìm hiểu thêm về anh hùng!";
+    return "📚 Hãy đọc thêm về các anh hùng nhé!";
+  };
+
+  if (gameFinished) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto">
+          <div className="p-8 text-center">
+            <h2 className="text-3xl font-bold text-history-blue mb-4">
+              🏆 Quiz Hoàn Thành!
+            </h2>
+            <div className="text-6xl mb-4">
+              {score >= 8 ? "🏆" : score >= 6 ? "🎖️" : "📚"}
+            </div>
+            <div className="text-4xl font-bold text-victory-red mb-2">
+              {score}/{questions.length}
+            </div>
+            <div className="text-xl text-gray-700 mb-6">
+              {getScoreMessage()}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              <div className="bg-green-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-green-600">{score}</div>
+                <div className="text-sm text-gray-600">Câu đúng</div>
+              </div>
+              <div className="bg-red-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-red-600">
+                  {questions.length - score}
+                </div>
+                <div className="text-sm text-gray-600">Câu sai</div>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-blue-600">
+                  {Math.round((score / questions.length) * 100)}%
+                </div>
+                <div className="text-sm text-gray-600">Điểm số</div>
+              </div>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={resetGame}
+                className="bg-history-blue hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold"
+              >
+                🔄 Chơi lại
+              </button>
+              <button
+                onClick={onClose}
+                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-bold"
+              >
+                Thoát
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto">
         <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-history-blue">
-              ✈️ Phi Công MiG-21
+              🏆 Quiz Anh Hùng
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
+              className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
             >
               ×
             </button>
           </div>
 
-          <div className="mb-4 flex justify-between items-center">
-            <div className="text-lg font-semibold">Điểm: {score}</div>
-            {!gameRunning ? (
-              <button
-                onClick={startGame}
-                className="bg-history-blue hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-bold"
-              >
-                Cất Cánh Ngay
-              </button>
-            ) : (
-              <div className="text-sm text-gray-600">
-                Dùng phím mũi tên để điều khiển!
+          <div className="mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm text-gray-600">
+                Câu {currentQuestion + 1}/{questions.length}
+              </span>
+              <span className="text-sm text-gray-600">
+                Điểm: {score}/{currentQuestion + (showResult ? 1 : 0)}
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-history-blue h-2 rounded-full transition-all duration-300"
+                style={{
+                  width: `${
+                    ((currentQuestion + (showResult ? 1 : 0)) /
+                      questions.length) *
+                    100
+                  }%`,
+                }}
+              ></div>
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6 leading-relaxed">
+              {questions[currentQuestion].question}
+            </h3>
+
+            {/* Hiển thị tất cả các lựa chọn rõ ràng ngay từ đầu */}
+            <div className="space-y-3">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswerSelect(index)}
+                  disabled={showResult}
+                  className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 font-medium ${
+                    showResult
+                      ? index === questions[currentQuestion].correct
+                        ? "bg-green-100 border-green-500 text-green-800"
+                        : index === selectedAnswer &&
+                          selectedAnswer !== questions[currentQuestion].correct
+                        ? "bg-red-100 border-red-500 text-red-800"
+                        : "bg-white border-gray-300 text-gray-600"
+                      : selectedAnswer === index
+                      ? "bg-history-blue text-white border-history-blue shadow-md"
+                      : "bg-white border-gray-300 text-gray-800 hover:border-history-blue hover:bg-history-blue/5 hover:shadow-sm"
+                  }`}
+                >
+                  <span className="font-bold mr-3 text-lg">
+                    {String.fromCharCode(65 + index)}.
+                  </span>
+                  <span className="text-base">{option}</span>
+                </button>
+              ))}
+            </div>
+
+            {showResult && (
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-blue-800 font-medium mb-2">
+                  {selectedAnswer === questions[currentQuestion].correct
+                    ? "✅ Chính xác!"
+                    : "❌ Chưa đúng!"}
+                </p>
+                <p className="text-blue-700 text-sm">
+                  <strong>Giải thích:</strong>{" "}
+                  {questions[currentQuestion].explanation}
+                </p>
               </div>
             )}
           </div>
 
-          <canvas
-            ref={canvasRef}
-            width={800}
-            height={400}
-            className="border border-gray-300 rounded-lg w-full"
-          />
-
-          <div className="mt-4 text-sm text-gray-600">
-            <p>🎯 Hướng dẫn: Dùng phím mũi tên (←↑↓→) để điều khiển MiG-21</p>
-            <p>🚀 Máy bay sẽ tự động bắn tên lửa vào B-52</p>
-            <p>🏆 Mục tiêu: Bắn rơi càng nhiều B-52 càng tốt!</p>
+          <div className="flex justify-center">
+            <button
+              onClick={handleNextQuestion}
+              disabled={selectedAnswer === null || showResult}
+              className={`px-8 py-3 rounded-lg font-bold transition-all duration-200 ${
+                selectedAnswer !== null && !showResult
+                  ? "bg-history-blue hover:bg-blue-600 text-white"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+            >
+              {currentQuestion + 1 === questions.length
+                ? "Hoàn thành"
+                : "Câu tiếp theo"}{" "}
+              →
+            </button>
           </div>
         </div>
       </div>
