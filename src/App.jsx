@@ -2,6 +2,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import About from "./components/About";
+import AIAssistant from "./components/AIAssistant";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
 import Header from "./components/Header";
@@ -30,6 +31,7 @@ function App() {
         <Memorial />
       </main>
       <Footer />
+      <AIAssistant />
     </div>
   );
 }

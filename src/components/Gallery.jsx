@@ -7,7 +7,7 @@ const Gallery = () => {
       caption: "Tên lửa phòng không Việt Nam khai hỏa",
     },
     {
-      url: "https://img.cand.com.vn/resize/800x800/NewFiles/Images/2022/12/19/may_bay-1671458134828.jpg",
+      url: "https://media.vov.vn/sites/default/files/styles/large/public/2021-12/dien_bien_phu_2.jpg",
       caption: "B-52 bị bắn rơi trên bầu trời Hà Nội",
     },
     {
