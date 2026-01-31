@@ -13,7 +13,7 @@ const About = () => {
           <div data-aos="fade-right">
             <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
               <img
-                src="https://tienphong.vn/anh-hung-phi-cong-tiet-lo-ly-do-ha-guc-phao-dai-bay-b-52-dau-tien-post996797.tpo"
+                src="https://cdn.tienphong.vn/images/61144948b9c6ebf4737a5dc317b87452f8c4a150786dde4ce7837b0a98562da6f141bf701cc4cbe13d40e39c08615c3c/1_TPVX.jpg"
                 alt="Máy bay B-52 của Mỹ"
                 className="object-cover w-full h-full"
               />
